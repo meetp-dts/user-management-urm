@@ -13,38 +13,50 @@ import {
 } from '@mui/material';
 import { People, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
-import seedUsers from './data/users.json';
 
 type UserRow = Record<string, unknown>;
 
 const STORAGE_KEY = 'user-management-users';
 
+const FIELDS = [
+  'user_id',
+  'full_name',
+  'username',
+  'email',
+  'phone_number',
+  'department',
+  'role',
+  'status',
+  'continent',
+  'country',
+  'state_province',
+];
+
 function loadUsers(): UserRow[] {
   const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return seedUsers as UserRow[];
+  if (!raw) return [];
   try {
-    const parsed = JSON.parse(raw) as UserRow[];
-    return parsed.length > 0 ? parsed : (seedUsers as UserRow[]);
+    return JSON.parse(raw) as UserRow[];
   } catch {
-    return seedUsers as UserRow[];
+    return [];
   }
 }
 
-function emptyFormFrom(row: UserRow): Record<string, string> {
-  return Object.fromEntries(Object.keys(row).map((key) => [key, '']));
+function emptyForm(): Record<string, string> {
+  return Object.fromEntries(FIELDS.map((key) => [key, '']));
 }
 
 export function UsersPage() {
   const [rows, setRows] = useState<UserRow[]>(loadUsers);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [form, setForm] = useState<Record<string, string>>(() => emptyFormFrom(rows[0] ?? {}));
+  const [form, setForm] = useState<Record<string, string>>(emptyForm);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
   }, [rows]);
 
   const handleOpenDialog = () => {
-    setForm(emptyFormFrom(rows[0] ?? {}));
+    setForm(emptyForm());
     setDialogOpen(true);
   };
 
