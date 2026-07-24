@@ -109,7 +109,7 @@ function SideRail({ activePage, onNavigate }: { activePage: Page; onNavigate: (p
 }
 
 export default function App() {
-  const [activePage, setActivePage] = useState<Page>('users');
+  const [activePage, setActivePage] = useState<Page>('dashboard');
 
   return (
     <ThemeProvider theme={theme}>
