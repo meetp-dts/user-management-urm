@@ -1,9 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 import { Box, Stack, Avatar, IconButton, Typography, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import {
   GridView,
-  TableChart,
-  Folder,
   BarChart,
   ChangeHistory,
   AccountTree,
@@ -12,8 +10,14 @@ import {
   HelpOutline,
   Settings,
   Notifications,
+  Business,
+  People,
 } from '@mui/icons-material';
 import { UsersPage } from './UsersPage';
+import { DepartmentPage } from './DepartmentPage';
+import { DashboardPage } from './DashboardPage';
+
+type Page = 'dashboard' | 'department' | 'users';
 
 const theme = createTheme({
   palette: {
@@ -23,12 +27,12 @@ const theme = createTheme({
   shape: { borderRadius: 8 },
 });
 
-const SIDEBAR_ICONS = [
-  { Icon: GridView, color: '#3b82f6' },
-  { Icon: TableChart, color: '#22c55e' },
-  { Icon: Folder, color: '#f59e0b' },
-  { Icon: BarChart, color: '#a855f7' },
-  { Icon: ChangeHistory, color: '#ec4899' },
+const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | null }> = [
+  { Icon: GridView, color: '#3b82f6', page: 'dashboard' },
+  { Icon: Business, color: '#f59e0b', page: 'department' },
+  { Icon: People, color: '#22c55e', page: 'users' },
+  { Icon: BarChart, color: '#a855f7', page: null },
+  { Icon: ChangeHistory, color: '#ec4899', page: null },
 ];
 
 function Header() {
@@ -65,7 +69,7 @@ function Header() {
   );
 }
 
-function SideRail() {
+function SideRail({ activePage, onNavigate }: { activePage: Page; onNavigate: (page: Page) => void }) {
   return (
     <Box
       component="nav"
@@ -82,8 +86,13 @@ function SideRail() {
         borderColor: 'divider',
       }}
     >
-      {SIDEBAR_ICONS.map(({ Icon, color }, i) => (
-        <IconButton key={i} size="small">
+      {SIDEBAR_ICONS.map(({ Icon, color, page }, i) => (
+        <IconButton
+          key={i}
+          size="small"
+          onClick={page ? () => onNavigate(page) : undefined}
+          sx={page && activePage === page ? { bgcolor: `${color}22` } : undefined}
+        >
           <Icon sx={{ color }} />
         </IconButton>
       ))}
@@ -100,15 +109,19 @@ function SideRail() {
 }
 
 export default function App() {
+  const [activePage, setActivePage] = useState<Page>('users');
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
         <Header />
         <Box sx={{ flex: 1, display: 'flex', minHeight: 0 }}>
-          <SideRail />
+          <SideRail activePage={activePage} onNavigate={setActivePage} />
           <Box sx={{ flex: 1, minWidth: 0, overflow: 'auto' }}>
-            <UsersPage />
+            {activePage === 'dashboard' && <DashboardPage />}
+            {activePage === 'department' && <DepartmentPage />}
+            {activePage === 'users' && <UsersPage />}
           </Box>
         </Box>
       </Box>

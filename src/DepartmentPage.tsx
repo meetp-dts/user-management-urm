@@ -11,36 +11,34 @@ import {
   DialogActions,
   TextField,
 } from '@mui/material';
-import { People, Add, InfoOutlined, Close } from '@mui/icons-material';
+import { Business, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
 
-type UserRow = Record<string, unknown>;
+type DepartmentRow = Record<string, unknown>;
 
-const STORAGE_KEY = 'user-management-users';
+const STORAGE_KEY = 'user-management-departments';
 
-const FIELDS = [
-  'user_id',
-  'full_name',
-  'username',
-  'email',
-  'phone_number',
-  'department',
-  'role',
-  'status',
-  'continent',
-  'country',
-  'state_province',
-  'title',
-  'territory',
+const FIELDS = ['dept_id', 'name', 'division', 'head', 'employee_count', 'location', 'status'];
+
+// Seeded from real aggregates in Demo_User_Management.json (department, division, manager, country, headcount).
+const SEED_DEPARTMENTS: DepartmentRow[] = [
+  { dept_id: 'DPT-0001', name: 'Product', division: 'Product & Design', head: 'Aarav Bose', employee_count: 30, location: 'United Kingdom', status: 'Active' },
+  { dept_id: 'DPT-0002', name: 'Operations', division: 'Corporate Services', head: 'Kavya Iyer', employee_count: 42, location: 'United Kingdom', status: 'Active' },
+  { dept_id: 'DPT-0003', name: 'Finance', division: 'Corporate Services', head: 'Aarav Gupta', employee_count: 31, location: 'United Kingdom', status: 'Active' },
+  { dept_id: 'DPT-0004', name: 'Marketing', division: 'Growth', head: 'Sneha Kumar', employee_count: 36, location: 'United Kingdom', status: 'Active' },
+  { dept_id: 'DPT-0005', name: 'Engineering', division: 'Technology', head: 'Meera Sharma', employee_count: 33, location: 'United Kingdom', status: 'Active' },
+  { dept_id: 'DPT-0006', name: 'Human Resources', division: 'People & Culture', head: 'Diya Mehta', employee_count: 49, location: 'United Kingdom', status: 'Active' },
+  { dept_id: 'DPT-0007', name: 'Sales', division: 'Revenue', head: 'Riya Iyer', employee_count: 29, location: 'United Kingdom', status: 'Active' },
 ];
 
-function loadUsers(): UserRow[] {
+function loadDepartments(): DepartmentRow[] {
   const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return [];
+  if (!raw) return SEED_DEPARTMENTS;
   try {
-    return JSON.parse(raw) as UserRow[];
+    const parsed = JSON.parse(raw) as DepartmentRow[];
+    return parsed.length > 0 ? parsed : SEED_DEPARTMENTS;
   } catch {
-    return [];
+    return SEED_DEPARTMENTS;
   }
 }
 
@@ -48,8 +46,8 @@ function emptyForm(): Record<string, string> {
   return Object.fromEntries(FIELDS.map((key) => [key, '']));
 }
 
-export function UsersPage() {
-  const [rows, setRows] = useState<UserRow[]>(loadUsers);
+export function DepartmentPage() {
+  const [rows, setRows] = useState<DepartmentRow[]>(loadDepartments);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [form, setForm] = useState<Record<string, string>>(emptyForm);
 
@@ -62,10 +60,10 @@ export function UsersPage() {
     setDialogOpen(true);
   };
 
-  const handleAddUser = () => {
-    const newRow: UserRow = { ...form };
-    if (!newRow.user_id) {
-      newRow.user_id = `USR-${String(rows.length + 1).padStart(4, '0')}`;
+  const handleAddDepartment = () => {
+    const newRow: DepartmentRow = { ...form };
+    if (!newRow.dept_id) {
+      newRow.dept_id = `DPT-${String(rows.length + 1).padStart(4, '0')}`;
     }
     setRows((prev) => [newRow, ...prev]);
     setDialogOpen(false);
@@ -76,14 +74,14 @@ export function UsersPage() {
       <Box sx={{ px: 3, pt: 2.5, pb: 1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>
-            <People sx={{ color: '#f59e0b' }} />
+            <Business sx={{ color: '#f59e0b' }} />
             <Typography variant="h5" fontWeight={600} sx={{ color: '#f59e0b' }}>
-              Users
+              Department
             </Typography>
             <InfoOutlined sx={{ fontSize: 18, color: 'text.disabled' }} />
           </Stack>
           <Button variant="contained" size="small" startIcon={<Add sx={{ fontSize: 16 }} />} onClick={handleOpenDialog}>
-            Add user
+            Add department
           </Button>
         </Stack>
       </Box>
@@ -94,7 +92,7 @@ export function UsersPage() {
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          Add user
+          Add department
           <IconButton size="small" onClick={() => setDialogOpen(false)}>
             <Close sx={{ fontSize: 16 }} />
           </IconButton>
@@ -117,8 +115,8 @@ export function UsersPage() {
           <Button onClick={() => setDialogOpen(false)} color="inherit">
             Cancel
           </Button>
-          <Button onClick={handleAddUser} variant="contained">
-            Add user
+          <Button onClick={handleAddDepartment} variant="contained">
+            Add department
           </Button>
         </DialogActions>
       </Dialog>
