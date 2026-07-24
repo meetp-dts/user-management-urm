@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import { People, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
@@ -80,7 +81,9 @@ export function UsersPage() {
             <Typography variant="h5" fontWeight={600} sx={{ color: '#22c55e' }}>
               Users
             </Typography>
-            <InfoOutlined sx={{ fontSize: 18, color: 'text.disabled' }} />
+            <Tooltip title="Manage user records: add, search, filter, sort, and export.">
+              <InfoOutlined sx={{ fontSize: 18, color: 'text.disabled' }} />
+            </Tooltip>
           </Stack>
           <Button variant="contained" size="small" startIcon={<Add sx={{ fontSize: 16 }} />} onClick={handleOpenDialog}>
             Add user

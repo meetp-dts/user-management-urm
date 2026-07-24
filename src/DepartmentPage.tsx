@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import { Business, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
@@ -78,7 +79,9 @@ export function DepartmentPage() {
             <Typography variant="h5" fontWeight={600} sx={{ color: '#f59e0b' }}>
               Department
             </Typography>
-            <InfoOutlined sx={{ fontSize: 18, color: 'text.disabled' }} />
+            <Tooltip title="Manage department records: add, search, filter, sort, and export.">
+              <InfoOutlined sx={{ fontSize: 18, color: 'text.disabled' }} />
+            </Tooltip>
           </Stack>
           <Button variant="contained" size="small" startIcon={<Add sx={{ fontSize: 16 }} />} onClick={handleOpenDialog}>
             Add department

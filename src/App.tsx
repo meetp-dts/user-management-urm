@@ -49,6 +49,18 @@ function Header() {
         bgcolor: 'background.paper',
         borderBottom: '1px solid',
         borderColor: 'divider',
+        position: 'relative',
+        zIndex: 1,
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: -24,
+          height: 24,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), transparent)',
+          pointerEvents: 'none',
+        },
       }}
     >
       <Stack direction="row" alignItems="center" spacing={1.5}>
@@ -65,6 +77,28 @@ function Header() {
         <IconButton size="small"><Settings fontSize="small" /></IconButton>
         <IconButton size="small"><Notifications fontSize="small" /></IconButton>
       </Stack>
+    </Box>
+  );
+}
+
+function Footer() {
+  return (
+    <Box
+      component="footer"
+      sx={{
+        height: 32,
+        flexShrink: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        px: 2,
+        bgcolor: 'background.paper',
+        borderTop: '1px solid',
+        borderColor: 'divider',
+      }}
+    >
+      <Typography variant="caption" color="text.secondary">Ready</Typography>
+      <Typography variant="caption" color="text.secondary">OmniEye · v1.0</Typography>
     </Box>
   );
 }
@@ -132,6 +166,7 @@ export default function App() {
             {activePage === 'users' && <UsersPage />}
           </Box>
         </Box>
+        <Footer />
       </Box>
     </ThemeProvider>
   );
