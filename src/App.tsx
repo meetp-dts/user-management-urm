@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Stack, Avatar, IconButton, Typography, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { Box, Stack, Avatar, IconButton, Typography, Tooltip, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import {
   GridView,
   BarChart,
@@ -17,7 +17,7 @@ import { UsersPage } from './UsersPage';
 import { DepartmentPage } from './DepartmentPage';
 import { DashboardPage } from './DashboardPage';
 
-type Page = 'dashboard' | 'department' | 'users';
+export type Page = 'dashboard' | 'department' | 'users';
 
 const theme = createTheme({
   palette: {
@@ -27,12 +27,12 @@ const theme = createTheme({
   shape: { borderRadius: 8 },
 });
 
-const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | null }> = [
-  { Icon: GridView, color: '#3b82f6', page: 'dashboard' },
-  { Icon: Business, color: '#f59e0b', page: 'department' },
-  { Icon: People, color: '#22c55e', page: 'users' },
-  { Icon: BarChart, color: '#a855f7', page: null },
-  { Icon: ChangeHistory, color: '#ec4899', page: null },
+const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | null; label: string }> = [
+  { Icon: GridView, color: '#3b82f6', page: 'dashboard', label: 'Dashboard' },
+  { Icon: Business, color: '#f59e0b', page: 'department', label: 'Department' },
+  { Icon: People, color: '#22c55e', page: 'users', label: 'Users' },
+  { Icon: BarChart, color: '#a855f7', page: null, label: 'Analytics' },
+  { Icon: ChangeHistory, color: '#ec4899', page: null, label: 'Alerts' },
 ];
 
 function Header() {
@@ -86,16 +86,24 @@ function SideRail({ activePage, onNavigate }: { activePage: Page; onNavigate: (p
         borderColor: 'divider',
       }}
     >
-      {SIDEBAR_ICONS.map(({ Icon, color, page }, i) => (
-        <IconButton
-          key={i}
-          size="small"
-          onClick={page ? () => onNavigate(page) : undefined}
-          sx={page && activePage === page ? { bgcolor: `${color}22` } : undefined}
-        >
-          <Icon sx={{ color }} />
-        </IconButton>
-      ))}
+      {SIDEBAR_ICONS.map(({ Icon, color, page, label }, i) => {
+        const button = (
+          <IconButton
+            size="small"
+            onClick={page ? () => onNavigate(page) : undefined}
+            sx={page && activePage === page ? { bgcolor: `${color}22` } : undefined}
+          >
+            <Icon sx={{ color }} />
+          </IconButton>
+        );
+        return page ? (
+          <Tooltip key={i} title={label} placement="right">
+            {button}
+          </Tooltip>
+        ) : (
+          <Box key={i}>{button}</Box>
+        );
+      })}
       <Box sx={{ flex: 1 }} />
       <IconButton size="small">
         <AccountTree sx={{ color: '#eab308' }} />
@@ -119,7 +127,7 @@ export default function App() {
         <Box sx={{ flex: 1, display: 'flex', minHeight: 0 }}>
           <SideRail activePage={activePage} onNavigate={setActivePage} />
           <Box sx={{ flex: 1, minWidth: 0, overflow: 'auto' }}>
-            {activePage === 'dashboard' && <DashboardPage />}
+            {activePage === 'dashboard' && <DashboardPage onNavigate={setActivePage} />}
             {activePage === 'department' && <DepartmentPage />}
             {activePage === 'users' && <UsersPage />}
           </Box>
