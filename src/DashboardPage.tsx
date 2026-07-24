@@ -37,7 +37,7 @@ export function DashboardPage() {
         Dashboard
       </Typography>
       <Stack direction="row" spacing={2}>
-        <StatCard label="Total Users" value={userCount} color="#3b82f6" Icon={Group} />
+        <StatCard label="Total Users" value={userCount} color="#a855f7" Icon={Group} />
         <StatCard label="Total Departments" value={departmentCount} color="#ec4899" Icon={Business} />
       </Stack>
     </Box>

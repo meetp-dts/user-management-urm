@@ -76,8 +76,8 @@ export function UsersPage() {
       <Box sx={{ px: 3, pt: 2.5, pb: 1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>
-            <People sx={{ color: '#f59e0b' }} />
-            <Typography variant="h5" fontWeight={600} sx={{ color: '#f59e0b' }}>
+            <People sx={{ color: '#22c55e' }} />
+            <Typography variant="h5" fontWeight={600} sx={{ color: '#22c55e' }}>
               Users
             </Typography>
             <InfoOutlined sx={{ fontSize: 18, color: 'text.disabled' }} />
