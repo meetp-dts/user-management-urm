@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { People, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
+import seedUsers from './data/users-seed.json';
 
 type UserRow = Record<string, unknown>;
 
@@ -37,11 +38,12 @@ const FIELDS = [
 
 function loadUsers(): UserRow[] {
   const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return [];
+  if (!raw) return seedUsers as UserRow[];
   try {
-    return JSON.parse(raw) as UserRow[];
+    const parsed = JSON.parse(raw) as UserRow[];
+    return parsed.length > 0 ? parsed : (seedUsers as UserRow[]);
   } catch {
-    return [];
+    return seedUsers as UserRow[];
   }
 }
 
