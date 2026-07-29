@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { Business, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
+import seedDepartments from './data/departments-seed.json';
 
 type DepartmentRow = Record<string, unknown>;
 
@@ -21,25 +22,14 @@ const STORAGE_KEY = 'user-management-departments';
 
 const FIELDS = ['dept_id', 'name', 'division', 'head', 'employee_count', 'location', 'status'];
 
-// Seeded from real aggregates in Demo_User_Management.json (department, division, manager, country, headcount).
-const SEED_DEPARTMENTS: DepartmentRow[] = [
-  { dept_id: 'DPT-0001', name: 'Product', division: 'Product & Design', head: 'Aarav Bose', employee_count: 30, location: 'United Kingdom', status: 'Active' },
-  { dept_id: 'DPT-0002', name: 'Operations', division: 'Corporate Services', head: 'Kavya Iyer', employee_count: 42, location: 'United Kingdom', status: 'Active' },
-  { dept_id: 'DPT-0003', name: 'Finance', division: 'Corporate Services', head: 'Aarav Gupta', employee_count: 31, location: 'United Kingdom', status: 'Active' },
-  { dept_id: 'DPT-0004', name: 'Marketing', division: 'Growth', head: 'Sneha Kumar', employee_count: 36, location: 'United Kingdom', status: 'Active' },
-  { dept_id: 'DPT-0005', name: 'Engineering', division: 'Technology', head: 'Meera Sharma', employee_count: 33, location: 'United Kingdom', status: 'Active' },
-  { dept_id: 'DPT-0006', name: 'Human Resources', division: 'People & Culture', head: 'Diya Mehta', employee_count: 49, location: 'United Kingdom', status: 'Active' },
-  { dept_id: 'DPT-0007', name: 'Sales', division: 'Revenue', head: 'Riya Iyer', employee_count: 29, location: 'United Kingdom', status: 'Active' },
-];
-
 function loadDepartments(): DepartmentRow[] {
   const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return SEED_DEPARTMENTS;
+  if (!raw) return seedDepartments as DepartmentRow[];
   try {
     const parsed = JSON.parse(raw) as DepartmentRow[];
-    return parsed.length > 0 ? parsed : SEED_DEPARTMENTS;
+    return parsed.length > 0 ? parsed : (seedDepartments as DepartmentRow[]);
   } catch {
-    return SEED_DEPARTMENTS;
+    return seedDepartments as DepartmentRow[];
   }
 }
 

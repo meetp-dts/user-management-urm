@@ -1,0 +1,227 @@
+[
+  {
+    "dept_id": "DPT-0001",
+    "name": "Engineering",
+    "division": "Technology",
+    "head": "Lakshmi Menon",
+    "employee_count": 13,
+    "location": "Mumbai",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0002",
+    "name": "HR",
+    "division": "People & Culture",
+    "head": "Karthik Desai",
+    "employee_count": 9,
+    "location": "Bangalore",
+    "status": "On Leave"
+  },
+  {
+    "dept_id": "DPT-0003",
+    "name": "Product",
+    "division": "Product & Design",
+    "head": "Arjun Bose",
+    "employee_count": 8,
+    "location": "Delhi",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0004",
+    "name": "Operations",
+    "division": "Corporate Services",
+    "head": "Divya Kumar",
+    "employee_count": 7,
+    "location": "Remote",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0005",
+    "name": "Sales",
+    "division": "Revenue",
+    "head": "Meera Shah",
+    "employee_count": 7,
+    "location": "Bangalore",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0006",
+    "name": "Finance",
+    "division": "Corporate Services",
+    "head": "Rajesh Menon",
+    "employee_count": 6,
+    "location": "Pune",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0007",
+    "name": "HR",
+    "division": "People & Culture",
+    "head": "Srinivas Mukherjee",
+    "employee_count": 6,
+    "location": "Delhi",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0008",
+    "name": "HR",
+    "division": "People & Culture",
+    "head": "Manoj Iyer",
+    "employee_count": 6,
+    "location": "Remote",
+    "status": "Contract"
+  },
+  {
+    "dept_id": "DPT-0009",
+    "name": "Marketing",
+    "division": "Growth",
+    "head": "Rekha Mukherjee",
+    "employee_count": 6,
+    "location": "Pune",
+    "status": "Contract"
+  },
+  {
+    "dept_id": "DPT-0010",
+    "name": "Operations",
+    "division": "Corporate Services",
+    "head": "Rahul Menon",
+    "employee_count": 6,
+    "location": "Chennai",
+    "status": "Probation"
+  },
+  {
+    "dept_id": "DPT-0011",
+    "name": "Product",
+    "division": "Product & Design",
+    "head": "Naveen Pillai",
+    "employee_count": 6,
+    "location": "Remote",
+    "status": "Probation"
+  },
+  {
+    "dept_id": "DPT-0012",
+    "name": "Engineering",
+    "division": "Technology",
+    "head": "Deepa Bose",
+    "employee_count": 5,
+    "location": "Bangalore",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0013",
+    "name": "Engineering",
+    "division": "Technology",
+    "head": "Karthik Shah",
+    "employee_count": 5,
+    "location": "Delhi",
+    "status": "Contract"
+  },
+  {
+    "dept_id": "DPT-0014",
+    "name": "Engineering",
+    "division": "Technology",
+    "head": "Vikram Gupta",
+    "employee_count": 5,
+    "location": "Pune",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0015",
+    "name": "Engineering",
+    "division": "Technology",
+    "head": "Naveen Nair",
+    "employee_count": 5,
+    "location": "Remote",
+    "status": "Contract"
+  },
+  {
+    "dept_id": "DPT-0016",
+    "name": "Finance",
+    "division": "Corporate Services",
+    "head": "Karthik Desai",
+    "employee_count": 5,
+    "location": "Mumbai",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0017",
+    "name": "HR",
+    "division": "People & Culture",
+    "head": "Arjun Gupta",
+    "employee_count": 5,
+    "location": "Mumbai",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0018",
+    "name": "Marketing",
+    "division": "Growth",
+    "head": "Kavitha Sharma",
+    "employee_count": 5,
+    "location": "Bangalore",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0019",
+    "name": "Product",
+    "division": "Product & Design",
+    "head": "Lakshmi Sharma",
+    "employee_count": 5,
+    "location": "Bangalore",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0020",
+    "name": "Product",
+    "division": "Product & Design",
+    "head": "Lakshmi Mehta",
+    "employee_count": 5,
+    "location": "Pune",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0021",
+    "name": "Sales",
+    "division": "Revenue",
+    "head": "Vikram Menon",
+    "employee_count": 5,
+    "location": "Chennai",
+    "status": "On Leave"
+  },
+  {
+    "dept_id": "DPT-0022",
+    "name": "Sales",
+    "division": "Revenue",
+    "head": "Priya Reddy",
+    "employee_count": 5,
+    "location": "Hyderabad",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0023",
+    "name": "Sales",
+    "division": "Revenue",
+    "head": "Venkat Verma",
+    "employee_count": 5,
+    "location": "Pune",
+    "status": "Active"
+  },
+  {
+    "dept_id": "DPT-0024",
+    "name": "Engineering",
+    "division": "Technology",
+    "head": "Vikram Rao",
+    "employee_count": 4,
+    "location": "Chennai",
+    "status": "Probation"
+  },
+  {
+    "dept_id": "DPT-0025",
+    "name": "Finance",
+    "division": "Corporate Services",
+    "head": "Manoj Mishra",
+    "employee_count": 4,
+    "location": "Chennai",
+    "status": "Active"
+  }
+]
