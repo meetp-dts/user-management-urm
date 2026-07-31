@@ -18,7 +18,7 @@ import seedDepartments from './data/departments-seed.json';
 
 type DepartmentRow = Record<string, unknown>;
 
-const STORAGE_KEY = 'user-management-departments';
+const STORAGE_KEY = 'user-management-departments-new';
 
 const FIELDS = ['dept_id', 'name', 'division', 'head', 'employee_count', 'location', 'status'];
 
@@ -27,7 +27,7 @@ function loadDepartments(): DepartmentRow[] {
   if (!raw) return seedDepartments as DepartmentRow[];
   try {
     const parsed = JSON.parse(raw) as DepartmentRow[];
-    return parsed.length > 0 ? parsed : (seedDepartments as DepartmentRow[]);
+    return parsed.length >= seedDepartments.length ? parsed : (seedDepartments as DepartmentRow[]);
   } catch {
     return seedDepartments as DepartmentRow[];
   }

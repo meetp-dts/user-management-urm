@@ -18,7 +18,7 @@ import seedUsers from './data/users-seed.json';
 
 type UserRow = Record<string, unknown>;
 
-const STORAGE_KEY = 'user-management-users';
+const STORAGE_KEY = 'user-management-users-new';
 
 const FIELDS = [
   'user_id',
@@ -41,7 +41,7 @@ function loadUsers(): UserRow[] {
   if (!raw) return seedUsers as UserRow[];
   try {
     const parsed = JSON.parse(raw) as UserRow[];
-    return parsed.length > 0 ? parsed : (seedUsers as UserRow[]);
+    return parsed.length >= seedUsers.length ? parsed : (seedUsers as UserRow[]);
   } catch {
     return seedUsers as UserRow[];
   }
