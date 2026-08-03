@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Box, Stack, Avatar, IconButton, Typography, Tooltip, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { useMemo, useState } from 'react';
+import { Box, Stack, Avatar, IconButton, Typography, Tooltip, ThemeProvider, CssBaseline } from '@mui/material';
 import {
   GridView,
   BarChart,
@@ -7,25 +7,20 @@ import {
   AccountTree,
   Person,
   LightMode,
+  DarkMode,
   HelpOutline,
   Settings,
   Notifications,
   Business,
   People,
 } from '@mui/icons-material';
+import { useThemeStore, buildMuiTheme } from 'omnieye-theme-studio';
 import { UsersPage } from './UsersPage';
 import { DepartmentPage } from './DepartmentPage';
 import { DashboardPage } from './DashboardPage';
+import { SettingsPage } from './SettingsPage';
 
-export type Page = 'dashboard' | 'department' | 'users';
-
-const theme = createTheme({
-  palette: {
-    primary: { main: '#3b5bfd' },
-    background: { default: '#f5f6f8' },
-  },
-  shape: { borderRadius: 8 },
-});
+export type Page = 'dashboard' | 'department' | 'users' | 'settings';
 
 const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | null; label: string }> = [
   { Icon: GridView, color: '#3b82f6', page: 'dashboard', label: 'Dashboard' },
@@ -33,9 +28,10 @@ const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | 
   { Icon: People, color: '#22c55e', page: 'users', label: 'Users' },
   { Icon: BarChart, color: '#a855f7', page: null, label: 'Analytics' },
   { Icon: ChangeHistory, color: '#ec4899', page: null, label: 'Alerts' },
+  { Icon: Settings, color: '#64748b', page: 'settings', label: 'Settings' },
 ];
 
-function Header() {
+function Header({ mode, onToggleMode }: { mode: 'light' | 'dark'; onToggleMode: () => void }) {
   return (
     <Box
       component="header"
@@ -72,7 +68,9 @@ function Header() {
         </Typography>
       </Stack>
       <Stack direction="row" alignItems="center" spacing={0.5}>
-        <IconButton size="small"><LightMode fontSize="small" /></IconButton>
+        <IconButton size="small" onClick={onToggleMode}>
+          {mode === 'dark' ? <DarkMode fontSize="small" /> : <LightMode fontSize="small" />}
+        </IconButton>
         <IconButton size="small"><HelpOutline fontSize="small" /></IconButton>
         <IconButton size="small"><Settings fontSize="small" /></IconButton>
         <IconButton size="small"><Notifications fontSize="small" /></IconButton>
@@ -152,18 +150,23 @@ function SideRail({ activePage, onNavigate }: { activePage: Page; onNavigate: (p
 
 export default function App() {
   const [activePage, setActivePage] = useState<Page>('dashboard');
+  const themeSettings = useThemeStore((s) => s.settings);
+  const setThemeSettings = useThemeStore((s) => s.set);
+  const theme = useMemo(() => buildMuiTheme(themeSettings), [themeSettings]);
+  const toggleMode = () => setThemeSettings({ mode: themeSettings.mode === 'dark' ? 'light' : 'dark' });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        <Header />
+        <Header mode={themeSettings.mode} onToggleMode={toggleMode} />
         <Box sx={{ flex: 1, display: 'flex', minHeight: 0 }}>
           <SideRail activePage={activePage} onNavigate={setActivePage} />
           <Box sx={{ flex: 1, minWidth: 0, overflow: 'auto' }}>
             {activePage === 'dashboard' && <DashboardPage onNavigate={setActivePage} />}
             {activePage === 'department' && <DepartmentPage />}
             {activePage === 'users' && <UsersPage />}
+            {activePage === 'settings' && <SettingsPage />}
           </Box>
         </Box>
         <Footer />
