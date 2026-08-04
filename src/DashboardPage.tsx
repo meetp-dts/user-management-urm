@@ -26,7 +26,7 @@ function StatCard({
   onClick: () => void;
 }) {
   return (
-    <Card variant="outlined" sx={{ minWidth: 200 }}>
+    <Card sx={{ minWidth: 200 }}>
       <CardActionArea onClick={onClick}>
         <CardContent>
           <Stack direction="row" alignItems="center" spacing={1.5}>
