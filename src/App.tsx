@@ -28,7 +28,7 @@ const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | 
   { Icon: People, color: '#22c55e', page: 'users', label: 'Users' },
   { Icon: BarChart, color: '#a855f7', page: null, label: 'Analytics' },
   { Icon: ChangeHistory, color: '#ec4899', page: null, label: 'Alerts' },
-  { Icon: Settings, color: '#64748b', page: 'settings', label: 'Settings' },
+  { Icon: AccountTree, color: '#64748b', page: 'settings', label: 'Theme Studio' },
 ];
 
 function Header({ mode, onToggleMode }: { mode: 'light' | 'dark'; onToggleMode: () => void }) {
@@ -137,9 +137,6 @@ function SideRail({ activePage, onNavigate }: { activePage: Page; onNavigate: (p
         );
       })}
       <Box sx={{ flex: 1 }} />
-      <IconButton size="small">
-        <AccountTree sx={{ color: '#eab308' }} />
-      </IconButton>
       <IconButton size="small">
         <Person sx={{ color: '#3b82f6' }} />
       </IconButton>
