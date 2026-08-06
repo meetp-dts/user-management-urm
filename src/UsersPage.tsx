@@ -76,7 +76,7 @@ export function UsersPage() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Box sx={{ px: 3, pt: 2.5, pb: 1 }}>
+      <Box sx={{ px: (theme) => `${theme.tokens?.edgePad ?? 24}px`, pt: 2.5, pb: 1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>
             <People sx={{ color: '#22c55e' }} />
@@ -93,8 +93,8 @@ export function UsersPage() {
         </Stack>
       </Box>
 
-      <Box sx={{ flex: 1, minHeight: 0, px: 3, pb: 3 }}>
-        <URMViewer key={rows.length} data={rows} />
+      <Box sx={{ flex: 1, minHeight: 0, px: (theme) => `${theme.tokens?.edgePad ?? 24}px`, pb: (theme) => `${theme.tokens?.edgePad ?? 24}px` }}>
+        <URMViewer reportId="users-report" data={rows} />
       </Box>
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>

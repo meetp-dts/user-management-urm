@@ -80,7 +80,7 @@ export function DepartmentPage() {
       </Box>
 
       <Box sx={{ flex: 1, minHeight: 0, px: (theme) => `${theme.tokens?.edgePad ?? 24}px`, pb: (theme) => `${theme.tokens?.edgePad ?? 24}px` }}>
-        <URMViewer key={rows.length} data={rows} />
+        <URMViewer reportId="department-report" data={rows} />
       </Box>
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
