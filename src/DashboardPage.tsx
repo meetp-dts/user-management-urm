@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Stack, Card, CardActionArea, CardContent } from '@mui/material';
+import { Box, Typography, Stack, Card, CardActionArea, CardContent, useTheme } from '@mui/material';
 import { Group, Business } from '@mui/icons-material';
 import type { Page } from './App';
 
@@ -45,13 +45,16 @@ function StatCard({
 export function DashboardPage({ onNavigate }: { onNavigate: (page: Page) => void }) {
   const [userCount] = useState(() => countRows('user-management-users'));
   const [departmentCount] = useState(() => countRows('user-management-departments'));
+  const theme = useTheme();
+  const edgePad = theme.tokens?.edgePad ?? 24;
+  const cardGap = theme.tokens?.cardGap ?? 16;
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: `${edgePad}px` }}>
       <Typography variant="h5" fontWeight={600} sx={{ color: '#3b82f6', mb: 2 }}>
         Dashboard
       </Typography>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" sx={{ gap: `${cardGap}px` }}>
         <StatCard label="Total Users" value={userCount} color="#a855f7" Icon={Group} onClick={() => onNavigate('users')} />
         <StatCard label="Total Departments" value={departmentCount} color="#ec4899" Icon={Business} onClick={() => onNavigate('department')} />
       </Stack>
