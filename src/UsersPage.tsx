@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { People, Add, InfoOutlined, Close } from '@mui/icons-material';
 import { URMViewer } from 'dts-universal-report-module';
-import seedUsers from './data/users-seed.json';
+import seedUsers from './data/users-1000.json';
 
 type UserRow = Record<string, unknown>;
 
