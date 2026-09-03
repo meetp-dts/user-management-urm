@@ -5,6 +5,8 @@ import {
   BarChart,
   ChangeHistory,
   AccountTree,
+  Article,
+  Newspaper,
   Person,
   LightMode,
   DarkMode,
@@ -13,19 +15,28 @@ import {
   Notifications,
   Business,
   People,
+  Tune,
 } from '@mui/icons-material';
+// The package currently ships without TypeScript declarations.
+// @ts-expect-error — use the package's runtime exports until declarations are published.
 import { useThemeStore, buildMuiTheme } from 'omnieye-theme-studio';
 import { UsersPage } from './UsersPage';
 import { DepartmentPage } from './DepartmentPage';
 import { DashboardPage } from './DashboardPage';
 import { SettingsPage } from './SettingsPage';
+import { PostsPage } from './PostsPage';
+import { DummyPostsPage } from './DummyPostsPage';
+import { ConfigDemoPage } from './ConfigDemoPage';
 
-export type Page = 'dashboard' | 'department' | 'users' | 'settings';
+export type Page = 'dashboard' | 'department' | 'users' | 'posts' | 'dummyPosts' | 'configDemo' | 'settings';
 
 const SIDEBAR_ICONS: Array<{ Icon: typeof GridView; color: string; page: Page | null; label: string }> = [
   { Icon: GridView, color: '#3b82f6', page: 'dashboard', label: 'Dashboard' },
   { Icon: Business, color: '#f59e0b', page: 'department', label: 'Department' },
   { Icon: People, color: '#22c55e', page: 'users', label: 'Users' },
+  { Icon: Article, color: '#0ea5e9', page: 'posts', label: 'Posts' },
+  { Icon: Newspaper, color: '#f97316', page: 'dummyPosts', label: 'DummyJSON Posts' },
+  { Icon: Tune, color: '#8b5cf6', page: 'configDemo', label: 'Config Playground' },
   { Icon: BarChart, color: '#a855f7', page: null, label: 'Analytics' },
   { Icon: ChangeHistory, color: '#ec4899', page: null, label: 'Alerts' },
   { Icon: AccountTree, color: '#64748b', page: 'settings', label: 'Theme Studio' },
@@ -147,8 +158,8 @@ function SideRail({ activePage, onNavigate }: { activePage: Page; onNavigate: (p
 
 export default function App() {
   const [activePage, setActivePage] = useState<Page>('dashboard');
-  const themeSettings = useThemeStore((s) => s.settings);
-  const setThemeSettings = useThemeStore((s) => s.set);
+  const themeSettings = useThemeStore((s: { settings: any; }) => s.settings);
+  const setThemeSettings = useThemeStore((s: { set: any; }) => s.set);
   const theme = useMemo(() => buildMuiTheme(themeSettings), [themeSettings]);
   const toggleMode = () => setThemeSettings({ mode: themeSettings.mode === 'dark' ? 'light' : 'dark' });
 
@@ -163,6 +174,9 @@ export default function App() {
             {activePage === 'dashboard' && <DashboardPage onNavigate={setActivePage} />}
             {activePage === 'department' && <DepartmentPage />}
             {activePage === 'users' && <UsersPage />}
+            {activePage === 'posts' && <PostsPage />}
+            {activePage === 'dummyPosts' && <DummyPostsPage />}
+            {activePage === 'configDemo' && <ConfigDemoPage />}
             {activePage === 'settings' && <SettingsPage />}
           </Box>
         </Box>
